@@ -1,9 +1,7 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
 
-//const EMAIL_PATTERN = 
-
-/*const userSchema = new Schema({
+const userSchema = new Schema({
     name: {
         type :String,
         required: 'User name is required'
@@ -17,7 +15,7 @@ const bcrypt = require('bcrypt');
     },
     username: {
         type: String, 
-        required: 'User email is required',
+        required: 'User username is required',
         trim: true,
         unique: true,
         validate: {
@@ -32,21 +30,21 @@ const bcrypt = require('bcrypt');
         required: 'User password is required',
         minlenght: [8, 'User password needs at least 8 chars']
     },
-    /avatarUrl: {
+    /*avatarUrl: {
         type: String,
         default:funtion() {
             return
-        }
+        },
 
-    },
+    }*/
 });
 
 userSchema.pre('save', async function(next) {
     if (this.ismodified('passsword')) {
-        this.password = await bcrypt.hash(this.password, 5)
+        this.password = await bcrypt.hash(this.password, 10)
     }
     next();
-});*/
+});
 
 const User = mongoose.model('user', userSchema);
 module.exports = User;
