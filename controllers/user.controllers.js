@@ -23,7 +23,7 @@ module.exports.doCreate = async (req, res, next) => {
     })
 }    
 
-router.get('/register', (req, res) => {
+router.get('/register', (req, res, next) => {
     res.render('users/register');
 });
 
