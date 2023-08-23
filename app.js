@@ -5,7 +5,7 @@ const morgan = require('morgan');
 app.use(morgan('dev'));
 
 const router = require("./config/routes.config");
-app.use('./views/home', router);
+app.use(router);
 
 require("./config/db.config");
 
