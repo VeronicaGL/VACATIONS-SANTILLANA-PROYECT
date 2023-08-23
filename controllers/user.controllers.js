@@ -27,3 +27,23 @@ router.get('/register', (req, res, next) => {
     res.render('users/register');
 });
 
+module.exports.login = (req, res, next) => {
+    res.render('user/login')
+}
+
+module.exports.dologin = (req, res, next) => {
+    user.findOne({username: req.body.username}).then((user) => {
+        if (user) {
+            bcrypt.compare(req.body.password, user.password).then((match) => {
+                if (match){
+                    req.sessions.userId = user.id
+                    res.redirect('/profile')   
+                }else{
+                    res.redirect('/login')
+                }
+            })
+        }else{ 
+            res.redirect('/login')
+        }
+    })
+}    
